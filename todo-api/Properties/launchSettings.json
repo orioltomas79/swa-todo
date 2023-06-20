@@ -1,6 +1,6 @@
 {
   "profiles": {
-    "todo-api": {
+    "Todo.Api": {
       "commandName": "Project",
       "commandLineArgs": "--port 7204"
     }
