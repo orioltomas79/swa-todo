@@ -15,6 +15,8 @@ function App() {
     <>
       <p>Hello</p>
       <div>{data}</div>
+      <a href="/.auth/login/github">Login</a>
+      <a href="/.auth/logout">Log out</a>
     </>
   );
 }
