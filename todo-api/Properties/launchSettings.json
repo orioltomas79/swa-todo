@@ -2,7 +2,9 @@
   "profiles": {
     "Todo.Api": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7204"
+      "commandLineArgs": "--port 7204",
+      "launchBrowser": true,
+      "launchUrl": "api/swagger/ui"
     }
   }
 }
