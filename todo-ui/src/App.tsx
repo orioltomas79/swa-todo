@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from "react";
+import { Client } from "./api/apiClient.g.nswag";
 
 function App() {
   const [data, setData] = useState("");
 
   useEffect(() => {
     (async function () {
-      const text  = await (await fetch(`/api/message`)).text();
-      setData(text);
-      console.debug(data);
+      let c = new Client("http://localhost:7071/api");
+      let r = await c.function("Oriol");
+      setData(r);
     })();
   });
 

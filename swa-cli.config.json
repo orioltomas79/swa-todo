@@ -2,7 +2,7 @@
   "configurations": {
     "app": {
       "context": "http://localhost:3000",
-      "apiLocation": "http://localhost:7204",
+      "apiLocation": "http://localhost:7071",
       "swaConfigLocation": "./todo-ui"
     }
   }
