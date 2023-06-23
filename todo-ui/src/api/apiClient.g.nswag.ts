@@ -26,7 +26,7 @@ export class Client {
     this.baseUrl =
       baseUrl !== undefined && baseUrl !== null
         ? baseUrl
-        : "http://localhost:7204/api";
+        : "http://localhost:7071/api";
   }
 
   /**

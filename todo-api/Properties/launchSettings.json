@@ -2,7 +2,7 @@
   "profiles": {
     "Todo.Api": {
       "commandName": "Project",
-      "commandLineArgs": "--port 7071",
+      "commandLineArgs": "--port 7071 --cors *",
       "launchBrowser": true,
       "launchUrl": "api/swagger/ui"
     }

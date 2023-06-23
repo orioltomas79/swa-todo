@@ -1,23 +1,40 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Client } from "./api/apiClient.g.nswag";
 
 function App() {
-  const [data, setData] = useState("");
+  const [dataAxios, setDataAxios] = useState("");
+  const [dataFetch, setDataFetch] = useState("");
+  const [error, setError] = useState(null);
 
-  useEffect(() => {
-    (async function () {
-      let c = new Client("http://localhost:7071/api");
-      let r = await c.function("Oriol");
-      setData(r);
-    })();
-  });
+  const callFetchHandler = useCallback(async () => {
+    try {
+      const text = await (await fetch(`/api/message`)).text();
+      setDataFetch(text);
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }, []);
+
+  const callAxiosHandler = useCallback(async () => {
+    try {
+      let client = new Client("http://localhost:7071/api");
+      let result = await client.function("Oriol");
+      setDataAxios(result);
+    } catch (error: any) {
+      setError(error.message);
+    }
+  }, []);
 
   return (
     <>
       <p>Hello</p>
-      <div>{data}</div>
+      <button onClick={callFetchHandler}>Call fetch</button>
+      <div>{dataFetch}</div>
+      <button onClick={callAxiosHandler}>Call axios</button>
+      <div>{dataAxios}</div>
       <a href="/.auth/login/github">Login</a>
       <a href="/.auth/logout">Log out</a>
+      <div>{error}</div>
     </>
   );
 }
