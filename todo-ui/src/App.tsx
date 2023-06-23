@@ -8,7 +8,7 @@ function App() {
 
   const callFetchHandler = useCallback(async () => {
     try {
-      const text = await (await fetch(`/api/message`)).text();
+      const text = await(await fetch(`/api/HttpGetUserClaims`)).text();
       setDataFetch(text);
     } catch (error: any) {
       setError(error.message);
