@@ -18,8 +18,8 @@ function App() {
   const callAxiosHandler = useCallback(async () => {
     try {
       let client = new Client("http://localhost:7071/api");
-      let result = await client.function("Oriol");
-      setDataAxios(result);
+      let result = await client.httpGetUserClaims();
+      setDataAxios(JSON.stringify(result));
     } catch (error: any) {
       setError(error.message);
     }

@@ -97,6 +97,68 @@ export class Client {
   }
 
   /**
+   * @return The OK response
+   */
+  httpGetUserClaims(
+    cancelToken?: CancelToken | undefined
+  ): Promise<ClaimsPrincipal> {
+    let url_ = this.baseUrl + "/HttpGetUserClaims";
+    url_ = url_.replace(/[?&]$/, "");
+
+    let options_ = <AxiosRequestConfig>{
+      method: "GET",
+      url: url_,
+      headers: {
+        Accept: "application/json",
+      },
+      cancelToken,
+    };
+
+    return this.instance
+      .request(options_)
+      .catch((_error: any) => {
+        if (isAxiosError(_error) && _error.response) {
+          return _error.response;
+        } else {
+          throw _error;
+        }
+      })
+      .then((_response: AxiosResponse) => {
+        return this.processHttpGetUserClaims(_response);
+      });
+  }
+
+  protected processHttpGetUserClaims(
+    response: AxiosResponse
+  ): Promise<ClaimsPrincipal> {
+    const status = response.status;
+    let _headers: any = {};
+    if (response.headers && typeof response.headers === "object") {
+      for (let k in response.headers) {
+        if (response.headers.hasOwnProperty(k)) {
+          _headers[k] = response.headers[k];
+        }
+      }
+    }
+    if (status === 200) {
+      const _responseText = response.data;
+      let result200: any = null;
+      let resultData200 = _responseText;
+      result200 = JSON.parse(resultData200);
+      return Promise.resolve<ClaimsPrincipal>(result200);
+    } else if (status !== 200 && status !== 204) {
+      const _responseText = response.data;
+      return throwException(
+        "An unexpected server error occurred.",
+        status,
+        _responseText,
+        _headers
+      );
+    }
+    return Promise.resolve<ClaimsPrincipal>(<any>null);
+  }
+
+  /**
    * @param name The **Name** parameter
    * @return The OK response
    */
@@ -162,6 +224,40 @@ export class Client {
     }
     return Promise.resolve<string>(<any>null);
   }
+}
+
+export interface Claim {
+  issuer?: string | null;
+  originalIssuer?: string | null;
+  properties?: { [key: string]: string } | null;
+  subject?: ClaimsIdentity | null;
+  type?: string | null;
+  value?: string | null;
+  valueType?: string | null;
+}
+
+export interface ClaimsIdentity {
+  authenticationType?: string | null;
+  isAuthenticated?: boolean | null;
+  bootstrapContext?: any | null;
+  claims?: Claim[] | null;
+  label?: string | null;
+  name?: string | null;
+  nameClaimType?: string | null;
+  roleClaimType?: string | null;
+  actor?: ClaimsIdentity | null;
+}
+
+export interface ClaimsPrincipal {
+  claims?: Claim[] | null;
+  identities?: ClaimsIdentity[] | null;
+  identity?: IIdentity | null;
+}
+
+export interface IIdentity {
+  name?: string | null;
+  authenticationType?: string | null;
+  isAuthenticated?: boolean | null;
 }
 
 export class ApiException extends Error {
