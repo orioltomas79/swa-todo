@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useCallback } from "react";
 import { Client } from "./api/apiClient.g.nswag";
 
 function App() {
