@@ -8,8 +8,6 @@ using Microsoft.Azure.WebJobs;
 using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
-using Microsoft.OpenApi.Models;
-using Newtonsoft.Json;
 
 namespace Todo.Api
 {
@@ -24,13 +22,27 @@ namespace Todo.Api
 
         [FunctionName("HttpGetUserClaims")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
-        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(ClaimsPrincipal), Description = "The OK response")]
-        public ActionResult<ClaimsPrincipal> Run(
+        [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UserClaims), Description = "The OK response")]
+        public IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
         {
             _logger.LogInformation("C# HTTP trigger function processed a request.");
 
-            return StaticWebAppsAuth.Parse(req);
+            var claimsPrincipal = StaticWebAppsAuth.Parse(req);
+
+            var userClaims = new UserClaims()
+            {
+                Name = claimsPrincipal.Identity!.Name,
+                AuthType = claimsPrincipal.Identity.AuthenticationType
+            };
+            
+            return new OkObjectResult(userClaims);
+        }
+
+        public class UserClaims
+        {
+            public string Name { get; set; }
+            public string AuthType { get; set; }
         }
     }
 }
