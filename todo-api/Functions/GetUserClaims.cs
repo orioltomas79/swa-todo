@@ -1,7 +1,4 @@
-using System.IO;
 using System.Net;
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Azure.WebJobs;
@@ -9,24 +6,24 @@ using Microsoft.Azure.WebJobs.Extensions.Http;
 using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
 using Microsoft.Extensions.Logging;
 
-namespace Todo.Api
+namespace Todo.Api.Functions
 {
-    public class HttpGetUserClaims
+    public class GetUserClaims
     {
-        private readonly ILogger<HttpGetUserClaims> _logger;
+        private readonly ILogger<GetUserClaims> _logger;
 
-        public HttpGetUserClaims(ILogger<HttpGetUserClaims> log)
+        public GetUserClaims(ILogger<GetUserClaims> log)
         {
             _logger = log;
         }
 
-        [FunctionName("HttpGetUserClaims")]
+        [FunctionName("GetUserClaims")]
         [OpenApiOperation(operationId: "Run", tags: new[] { "name" })]
         [OpenApiResponseWithBody(statusCode: HttpStatusCode.OK, contentType: "application/json", bodyType: typeof(UserClaims), Description = "The OK response")]
         public IActionResult Run(
-            [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req)
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = null)] HttpRequest req)
         {
-            _logger.LogInformation("C# HTTP trigger function processed a request.");
+            _logger.LogInformation("GetUserClaims function processed a request.");
 
             var claimsPrincipal = StaticWebAppsAuth.Parse(req);
 

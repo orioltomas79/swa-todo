@@ -8,7 +8,7 @@ function App() {
 
   const callFetchHandler = useCallback(async () => {
     try {
-      const text = await (await fetch(`/api/HttpGetUserClaims`)).text();
+      const text = await (await fetch(`/api/GetUserClaims`)).text();
       setDataFetch(text);
     } catch (error: any) {
       setError(error.message);
@@ -18,8 +18,8 @@ function App() {
   const callAxiosHandler = useCallback(async () => {
     try {
       let client = new Client("/api");
-      let text = await client.httpGetUserClaims();
-      setDataAxios(text.name!);
+      let text = await client.getUserClaims();
+      setDataAxios(text.name! + " - " + text.authType);
     } catch (error: any) {
       setError(error.message);
     }
