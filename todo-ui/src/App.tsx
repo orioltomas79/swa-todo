@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
-import { Client } from "./api/apiClient.g.nswag";
-import axios from "axios";
+import apiClient from "./api/apiClient";
+
 
 function App() {
   const [dataAxios, setDataAxios] = useState("");
@@ -18,9 +18,7 @@ function App() {
 
   const callAxiosHandler = useCallback(async () => {
     try {
-      const axiosInstance = axios.create({ transformResponse: (data) => data });
-      let client = new Client("/api", axiosInstance);
-      let text = await client.getUserClaims();
+      let text = await apiClient.client.getUserClaims();
       setDataAxios(text.name! + " - " + text.authType);
     } catch (error: any) {
       setError(error.message);
