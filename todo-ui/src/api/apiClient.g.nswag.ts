@@ -73,8 +73,10 @@ export class Client {
     }
     if (status === 200) {
       const _responseText = response.data;
+      let result200: any = null;
       let resultData200 = _responseText;
-      return Promise.resolve<UserClaims>(resultData200);
+      result200 = JSON.parse(resultData200);
+      return Promise.resolve<UserClaims>(result200);
     } else if (status !== 200 && status !== 204) {
       const _responseText = response.data;
       return throwException(
