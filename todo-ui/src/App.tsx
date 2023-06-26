@@ -32,8 +32,8 @@ function App() {
       <div>{dataFetch}</div>
       <button onClick={callAxiosHandler}>Call axios</button>
       <div>{dataAxios}</div>
-      <a href="/.auth/login/github">Login</a>
-      <a href="/.auth/logout">Log out</a>
+      <a href="/login">Login</a>
+      <a href="/logout">Log out</a>
       <div>{error}</div>
     </>
   );
