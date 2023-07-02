@@ -1,6 +1,8 @@
-import React, { useState, useCallback } from "react";
+import { useState, useCallback } from "react";
 import apiClient from "./api/apiClient";
 import Button from "@mui/material/Button";
+import Navbar from "./components/Navbar/Navbar";
+import {BrowserRouter, Routes, Route } from "react-router-dom";
 
 function App() {
   const [dataAxios, setDataAxios] = useState("");
@@ -27,6 +29,7 @@ function App() {
 
   return (
     <>
+      <Navbar />
       <p>Hello</p>
       <Button variant="outlined" onClick={callFetchHandler}>
         Call fetch
