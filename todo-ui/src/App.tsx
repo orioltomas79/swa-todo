@@ -1,6 +1,6 @@
 import React, { useState, useCallback } from "react";
 import apiClient from "./api/apiClient";
-
+import Button from "@mui/material/Button";
 
 function App() {
   const [dataAxios, setDataAxios] = useState("");
@@ -28,9 +28,11 @@ function App() {
   return (
     <>
       <p>Hello</p>
-      <button onClick={callFetchHandler}>Call fetch</button>
+      <Button variant="outlined" onClick={callFetchHandler}>
+        Call fetch
+      </Button>
       <div>{dataFetch}</div>
-      <button onClick={callAxiosHandler}>Call axios</button>
+      <Button onClick={callAxiosHandler}>Call axios</Button>
       <div>{dataAxios}</div>
       <a href="/login">Login</a>
       <a href="/logout">Log out</a>
