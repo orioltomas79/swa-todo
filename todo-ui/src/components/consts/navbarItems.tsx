@@ -4,7 +4,7 @@ interface MainNavbarItem {
   id: number;
   icon: JSX.Element;
   label: string;
-  router: string;
+  route: string;
 }
 
 export const mainNavbarItems: MainNavbarItem[] = [
@@ -12,12 +12,12 @@ export const mainNavbarItems: MainNavbarItem[] = [
     id: 0,
     icon: <PeopleIcon />,
     label: "Authentication",
-    router: "route",
+    route: "authentication",
   },
   {
-    id: 0,
+    id: 1,
     icon: <PeopleIcon />,
-    label: "Authentication2",
-    router: "route",
-  }
+    label: "Hello World",
+    route: "helloworld",
+  },
 ];
