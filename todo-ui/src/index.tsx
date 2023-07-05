@@ -3,12 +3,11 @@ import ReactDOM from "react-dom/client";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import {
-  createBrowserRouter,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Authentication from "./pages/Authentication/Authentication";
 import HelloWorld from "./pages/HelloWorld/HelloWorld";
+import { ThemeProvider } from "@mui/material/styles";
+import { dashboardTheme } from "./dashboardTheme";
 
 const router = createBrowserRouter([
   {
@@ -27,7 +26,9 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <ThemeProvider theme={dashboardTheme}>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   </React.StrictMode>
 );
 
