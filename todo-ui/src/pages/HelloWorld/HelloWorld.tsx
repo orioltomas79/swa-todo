@@ -1,10 +1,4 @@
-import Grid from "@mui/material/Grid";
-
 const HelloWorld = () => {
-  return (
-    <Grid item xs={8}>
-      Hello world!
-    </Grid>
-  );
+  return <div style={{ marginLeft: "500px" }}>This is HelloWorld page.</div>;
 };
 export default HelloWorld;

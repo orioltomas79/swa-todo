@@ -1,5 +1,4 @@
 import Button from "@mui/material/Button";
-import Grid from "@mui/material/Grid";
 import { useState, useCallback } from "react";
 import apiClient from "../../api/apiClient";
 
@@ -27,7 +26,7 @@ const Authentication = () => {
   }, []);
 
   return (
-    <Grid item xs={8}>
+    <div style={{ marginLeft: "500px" }}>
       <p>Hello</p>
       <Button variant="outlined" onClick={callFetchHandler}>
         Call fetch
@@ -38,7 +37,7 @@ const Authentication = () => {
       <a href="/login">Login</a>
       <a href="/logout">Log out</a>
       <div>{error}</div>
-    </Grid>
+    </div>
   );
 };
 export default Authentication;
